@@ -1,0 +1,24 @@
+data=xlsread('data.xls','b2:i351');
+p=data(:,1:7);
+p=p';
+t=data(:,8);
+t=t';
+net=newff([min(p(1,:)) max(p(1,:));min(p(2,:)) max(p(2,:));min(p(3,:)) max(p(3,:));min(p(4,:)) max(p(4,:));min(p(5,:)) max(p(5,:))
+;min(p(6,:)) max(p(6,:));min(p(7,:)) max(p(7,:))],[5,1],{'tansig','purelin'});
+
+//
+baris 1-5
+membaca data di excel
+//proses inisialisasi nilai bobot
+6-7
+//menampilkan nilai inisialisasi bobot
+net.IW{1,1} -->35 bobot (dari input layer ke hidden layer)
+net.b{1} --> 5 bias
+net.LW{2,1} --> 5 bobot (dari hidden layer ke output layer)
+net.b{2} --> 1 bias
+
+//proses training
+tra=train(net,p,t)
+
+I1=net.IW{1,1}
+I2=tra.IW{1,1}
